@@ -443,31 +443,22 @@
         }
         
         .about-img img {
-            width: 100%;
-            border-radius: 10px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
             box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            transition: transform 0.5s ease;
+            transition: transform 0.6s;
         }
         
         .about-img:hover img {
             transform: rotateY(180deg);
         }
-        .about-img img {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;   /* make it round */
-  object-fit: cover;    /* keep proportion */
-  transition: transform 0.6s; /* smooth animation */
-}
-
-.about-img:hover img {
-  transform: rotateY(180deg); /* flip effect */
-}
-
-.about-text h3 {
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    color: var(--primary);
-    margin-bottom: 20px;
+        
+        .about-text h3 {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            color: var(--primary);
+            margin-bottom: 20px;
         }
         
         .about-text p {
@@ -513,86 +504,163 @@
             transform: rotate(360deg) scale(1.2);
         }
         
-        /* Skills Section - Hover Cards */
+        /* Skills Section - Updated for all devices */
         .skills-container {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 30px;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
             perspective: 1000px;
         }
         
         .skill-card {
-            width: 250px;
-            height: 250px;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
+            width: 280px;
+            height: 280px;
+            perspective: 1000px;
             cursor: pointer;
         }
         
-        .skill-card:hover {
+        .skill-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .skill-card.flipped .skill-card-inner {
             transform: rotateY(180deg);
         }
         
-        .skill-card-front,
-        .skill-card-back {
+        .skill-card-front, .skill-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .skill-card-front {
+            align-items: center;
+            padding: 25px;
+            box-sizing: border-box;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
         
         .skill-card-back {
-            background: linear-gradient(135deg, var(--accent), var(--purple));
             transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--accent), var(--purple));
         }
         
         .skill-card-front i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 15px;
             color: white;
         }
         
-        .skill-card-front h3 {
+        .skill-card-front h3, .skill-card-back h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: white;
-            font-size: 1.2rem;
-        }
-        
-        .skill-card-back h3 {
-            color: white;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
         }
         
         .skill-card-back ul {
-            list-style: none;
-            color: white;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
         }
         
-        .skill-card-back li {
-            margin-bottom: 8px;
+        .skill-card-back ul li {
+            padding: 8px 0;
+            font-size: 1.1rem;
+            color: white;
             position: relative;
             padding-left: 20px;
         }
         
-        .skill-card-back li::before {
+        .skill-card-back ul li::before {
             content: '✓';
             position: absolute;
             left: 0;
             color: var(--success);
+        }
+        
+        /* Responsive adjustments for skills */
+        @media (max-width: 992px) {
+            .skill-card {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .skill-card-front i {
+                font-size: 3rem;
+            }
+            
+            .skill-card-front h3, .skill-card-back h3 {
+                font-size: 1.3rem;
+            }
+            
+            .skill-card-back ul li {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .skills-container {
+                gap: 20px;
+            }
+            
+            .skill-card {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .skill-card-front i {
+                font-size: 2.5rem;
+            }
+            
+            .skill-card-front h3, .skill-card-back h3 {
+                font-size: 1.1rem;
+            }
+            
+            .skill-card-back ul li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .skills-container {
+                gap: 15px;
+            }
+            
+            .skill-card {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .skill-card-front, .skill-card-back {
+                padding: 15px;
+            }
+            
+            .skill-card-front i {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+            
+            .skill-card-front h3, .skill-card-back h3 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+            
+            .skill-card-back ul li {
+                font-size: 0.8rem;
+                padding: 5px 0;
+            }
         }
         
         /* Enhanced Projects Section - Full Details */
@@ -1331,10 +1399,6 @@
                 transform: none;
             }
             
-            .skill-card:hover {
-                transform: none;
-            }
-            
             .tech-tag:hover {
                 transform: none;
             }
@@ -1368,7 +1432,6 @@
 <body>
     <!-- Stars Background -->
     <div class="stars" id="stars"></div>
-
     <!-- Header -->
     <header>
         <nav class="container">
@@ -1390,7 +1453,6 @@
             </ul>
         </nav>
     </header>
-
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
@@ -1402,7 +1464,6 @@
             </div>
         </div>
     </section>
-
     <!-- About Section -->
     <section id="about" class="slide-section">
         <div class="container">
@@ -1410,10 +1471,9 @@
                 <h2>About Me</h2>
             </div>
             <div class="about-content">
-                    <div class="about-img">
-  <img src="pic.png" alt="Profile Picture">
-</div>
-
+                <div class="about-img">
+                    <img src="pic.png" alt="Profile Picture">
+                </div>
                 <div class="about-text">
                     <h3>Objective</h3>
                     <p>To begin my career in a challenging role that allows me to utilize my knowledge, skills, and passion for software development while contributing to the success of the organization. I aim to grow both personally and professionally while upholding the values and goals of the company.</p>
@@ -1429,8 +1489,7 @@
             </div>
         </div>
     </section>
-
-    <!-- Skills Section -->
+    <!-- Skills Section - Updated for all devices -->
     <section id="skills" class="slide-section">
         <div class="container">
             <div class="section-title">
@@ -1438,92 +1497,103 @@
             </div>
             <div class="skills-container">
                 <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-laptop-code"></i>
-                        <h3>Programming</h3>
-                    </div>
-                    <div class="skill-card-back">
-                        <h3>Languages</h3>
-                        <ul>
-                            <li>Java</li>
-                            <li>Python</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-database"></i>
-                        <h3>Database</h3>
-                    </div>
-                    <div class="skill-card-back">
-                        <h3>Technologies</h3>
-                        <ul>
-                            <li>SQL</li>
-                        </ul>
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-laptop-code"></i>
+                            <h3>Programming</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Languages</h3>
+                            <ul>
+                                <li>Java</li>
+                                <li>Python</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-tools"></i>
-                        <h3>Tools</h3>
-                    </div>
-                    <div class="skill-card-back">
-                        <h3>Software</h3>
-                        <ul>
-                            <li>Power BI (Basic)</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Courses</h3>
-                    </div>
-                    <div class="skill-card-back">
-                        <h3>Certifications</h3>
-                        <ul>
-                            <li>Prompt Engineering</li>
-                            <li>ChatGPT & AI Tools</li>
-                        </ul>
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-database"></i>
+                            <h3>Database</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Technologies</h3>
+                            <ul>
+                                <li>SQL</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-users"></i>
-                        <h3>Soft Skills</h3>
-                    </div>
-                    <div class="skill-card-back">
-                        <h3>Abilities</h3>
-                        <ul>
-                            <li>Problem-Solving</li>
-                            <li>Teamwork</li>
-                            <li>Communication</li>
-                            <li>Time Management</li>
-                        </ul>
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-tools"></i>
+                            <h3>Tools</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Software</h3>
+                            <ul>
+                                <li>Power BI (Basic)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="skill-card">
-                    <div class="skill-card-front">
-                        <i class="fas fa-language"></i>
-                        <h3>Languages</h3>
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Courses</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Certifications</h3>
+                            <ul>
+                                <li>Prompt Engineering</li>
+                                <li>ChatGPT & AI Tools</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="skill-card-back">
-                        <h3>Spoken</h3>
-                        <ul>
-                            <li>English</li>
-                            <li>Telugu</li>
-                        </ul>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-users"></i>
+                            <h3>Soft Skills</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Abilities</h3>
+                            <ul>
+                                <li>Problem-Solving</li>
+                                <li>Teamwork</li>
+                                <li>Communication</li>
+                                <li>Time Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-card-inner">
+                        <div class="skill-card-front">
+                            <i class="fas fa-language"></i>
+                            <h3>Languages</h3>
+                        </div>
+                        <div class="skill-card-back">
+                            <h3>Spoken</h3>
+                            <ul>
+                                <li>English</li>
+                                <li>Telugu</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- Enhanced Projects Section -->
     <section id="projects" class="slide-section">
         <div class="container">
@@ -1551,7 +1621,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Face Recognition System -->
                 <div class="project-card">
                     <div class="project-img" style="background: linear-gradient(45deg, #4FACFE, #00F2FE);">
@@ -1573,7 +1642,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Web Based Face Authentication -->
                 <div class="project-card">
                     <div class="project-img" style="background: linear-gradient(45deg, #F093FB, #F5576C);">
@@ -1597,7 +1665,6 @@
             </div>
         </div>
     </section>
-
     <!-- Education Section -->
     <section id="education" class="slide-section">
         <div class="container">
@@ -1641,7 +1708,6 @@
             </div>
         </div>
     </section>
-
     <!-- Sliding Cards Section -->
     <section id="sliding" class="slide-section">
         <div class="container">
@@ -1702,7 +1768,6 @@
             </div>
         </div>
     </section>
-
     <!-- Contact Section -->
     <section id="contact" class="slide-section">
         <div class="container">
@@ -1755,7 +1820,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -1776,7 +1840,6 @@
             <p>&copy; 2024 Upputuru Rithinkumar. All Rights Reserved.</p>
         </div>
     </footer>
-
     <script>
         // Generate stars
         const starsContainer = document.getElementById('stars');
@@ -1827,11 +1890,10 @@
                 }
             });
         });
-
+        
         // Active link highlighting based on scroll position
         const sections = document.querySelectorAll('section');
         const navLinksElements = document.querySelectorAll('.nav-link');
-
         window.addEventListener('scroll', () => {
             let current = '';
             
@@ -1850,7 +1912,7 @@
                 }
             });
         });
-
+        
         // Add ripple effect to navigation links
         navLinksElements.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -2016,7 +2078,35 @@
                 el.style.transition = 'none';
             });
         }
+        
+        // Skills cards functionality for all devices
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.skill-card');
+            
+            // For desktop: hover effect
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (window.innerWidth > 768) {
+                        this.classList.add('flipped');
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (window.innerWidth > 768) {
+                        this.classList.remove('flipped');
+                    }
+                });
+            });
+            
+            // For mobile: tap to flip
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        this.classList.toggle('flipped');
+                    }
+                });
+            });
+        });
     </script>
 </body>
-
 </html>
